@@ -1,10 +1,15 @@
-# paw
+# Paw
 The automatic local address generator for Pow
 
-# how to use
+## Requirements
+Pow (https://github.com/basecamp/pow)
 
-To create a local address, run
-$ paw -u [port] -a [address]
+## How to use
 
-To remove a local address, run
-$ paw -r [address]
+1. To create a local address
+
+  $ paw -p [port] -a [address]
+
+2. To remove a local address
+
+  $ paw -r [address]
