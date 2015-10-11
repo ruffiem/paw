@@ -1,0 +1,47 @@
+#!/bin/bash
+
+RED="\x1B[1;31m"
+GREEN="\x1B[0;32m"
+GREENB="\x1B[1;32m"
+NORMAL="\x1B[0;28m"
+
+echo -e "$GREENB" "Welcome to Paw : the automatic local address maker"
+echo -e "$NORMAL" "by ruffiem"
+
+while getopts p:a:r: opt
+  do
+  case "${opt}"
+  in
+    p) PORT=${OPTARG};;
+    a) ADD=${OPTARG};;
+    r) DEL=${OPTARG};;
+esac
+done
+
+if [ -n "$DEL" ]; then
+  echo -e "$GREEN" "Removing local address..."
+  rm ~/.pow/$DEL
+  echo -e "$GREENB" "Done."
+  exit 0
+fi
+
+echo -e "$GREEN" "Variables check..."
+
+if [ -z "$PORT" ]; then
+  echo -e "$RED" "ERR: Please specify a port -p [port]"
+  exit 0
+else
+  echo -e "$GREEN" "Port is $PORT"
+fi
+
+if [ -z "$ADD" ]; then
+  echo -e "$RED" "ERR: Please specify an address -a [address]"
+  exit 0
+else
+  echo -e "$GREEN" "Address is $ADD"
+fi
+
+echo -e "$GREEN" "Creating local address..."
+echo $PORT > ~/.pow/$ADD
+echo -e "$GREENB" "Try logging on http://$ADD.dev"
+exit 1
